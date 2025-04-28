@@ -6,7 +6,7 @@
 
 using namespace std;
 using namespace PolygonalLibrary;
-
+/*Modificare il file CMakeLists.txt per aggiunger eil file di test e completare il corpo degli ultimi test*/
 int main()
 {
     PolygonalMesh mesh;
@@ -33,6 +33,24 @@ int main()
                              {},
                              mesh.Cell1DsMarkers);
     
+    /* cout << "Cell0DsMarkers: [ ";
+    for(const auto& elem : mesh.Cell0DsMarkers){
+        cout << elem << ", ";
+    }
+    cout << "];" << endl;
+
+    cout << "Cell1DsMarkers: [ ";
+    for(const auto& elem : mesh.Cell1DsMarkers){
+        cout << elem << ", ";
+    }
+    cout << "];" << endl;
+
+    cout << "Cell2DsMarkers: [ ";
+    for(const auto& elem : mesh.Cell2DsMarkers){
+        cout << elem << ", ";
+    }
+    cout << "];" << endl; */
+
     /* Per i marker basta guardare se la stampa dà ciò che ci serve */
     /* Creare delle funzioni per calcolare delle lunghezze e delle aree per effettuare gli altri test */
     /* Per ultimo test usare le funzioni del prof. Vicini o usare le MeshConverter online, creare un 

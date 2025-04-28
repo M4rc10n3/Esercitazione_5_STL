@@ -99,6 +99,11 @@ namespace PolygonalLibrary{
 
         mesh.NumCell1Ds = listOfAllLines.size();
 
+        if(mesh.NumCell1Ds == 0){
+            cerr << "There are no cells 1D." << endl;
+            return false;
+        }
+
         mesh.Cell1DsIds.reserve(mesh.NumCell1Ds);
         mesh.Cell1DsExtrema = Eigen::Matrix2Xi::Zero(2, mesh.NumCell1Ds);
         mesh.Cell1DsMarkers = Eigen::VectorXi::Zero(mesh.NumCell1Ds);
@@ -140,23 +145,23 @@ namespace PolygonalLibrary{
 
         mesh.NumCell2Ds = listOfAllLines.size();
 
+        if(mesh.NumCell2Ds == 0){
+            cerr << "There are no cells 2D." << endl;
+            return false;
+        }
+
         mesh.Cell2DsIds.reserve(mesh.NumCell2Ds);
         mesh.Cell2DsMarkers = Eigen::VectorXi::Zero(mesh.NumCell2Ds);
-        mesh.Cell2DsVertices.reserve(mesh.NumCell2Ds);
+        mesh.Cell2DsVertices.resize(mesh.NumCell2Ds);
         
-        cout << "mesh.Cell2DsVertices.capacity(): " << mesh.Cell2DsVertices.capacity() << endl;
-        
-        mesh.Cell2DsEdges.reserve(mesh.NumCell2Ds);
-
-        cout << "mesh.Cell2DsEdges.capacity(): " << mesh.Cell2DsVertices.capacity() << endl;
+        mesh.Cell2DsEdges.resize(mesh.NumCell2Ds);
 
         char useless;
         int id;
         int NumVertices;
         int NumEdges;
-        vector<unsigned int> vertices;
-        vector<unsigned int> edges;
-
+        vector<int> vertices;
+        vector<int> edges;
         for(const string& line : listOfAllLines){
 
             istringstream inputLine(line);
@@ -164,52 +169,23 @@ namespace PolygonalLibrary{
             inputLine >> id >> useless
                       >> mesh.Cell2DsMarkers(id) >> useless
                       >> NumVertices;
-            cout << "line " << id << ": " << line << endl;
-            cout << "NumVertices: " << NumVertices << endl;
             
-            mesh.Cell2DsVertices[id].reserve(NumVertices);
-            cout << "mesh.Cell2DsVertices[" << id << "].capacity(): "<< mesh.Cell2DsVertices[id].capacity() << endl;
-            cout << "mesh.Cell2DsVertices[" << id << "].size(): "<< mesh.Cell2DsVertices[id].size() << endl;
+            mesh.Cell2DsVertices[id].resize(NumVertices);
             vertices.resize(NumVertices);
 
             for(int indexVertices = 0; indexVertices < NumVertices; indexVertices++){
                 inputLine >> useless >> vertices[indexVertices];
-                cout << "vertices[" << indexVertices <<  "]: " << vertices[indexVertices] << endl;
             }
-            cout << "Breakpoint a" << endl;
             mesh.Cell2DsVertices.push_back(vertices);
-            cout << "Breakpoint b" << endl;
-            for(int elementVertices = 0; elementVertices < mesh.Cell2DsVertices[id].size(); elementVertices++){
-                cout << "mesh.Cell2DsVertices[" << id << "][" << elementVertices << "]: "<< mesh.Cell2DsVertices[id][elementVertices] << endl;
-            }
-            cout << "Everything's alright after pushing the vertices vector " << id << " back." << endl;
 
             inputLine >> useless >> NumEdges;
-            cout << "NumEdges: " << NumEdges << endl;
+            mesh.Cell2DsEdges[id].resize(NumEdges);
 
-            cout << "Breakpoint 1" << endl;
-            // Il problema è a riga 194 (la prossima) quando si arriva alla cella con id 16
-            // Creare in prova un vettore di vettori e provare a inserirci gli elementi del file all'interno 
-            // per vedere se riesce a gestirli o meno
-            mesh.Cell2DsEdges[id].reserve(NumEdges);
-            cout << "mesh.Cell2DsEdges[" << id << "].capacity(): "<< mesh.Cell2DsEdges[id].capacity() << endl;
-            cout << "mesh.Cell2DsEdges[" << id << "].size(): "<< mesh.Cell2DsEdges[id].size() << endl;
-            cout << "Breakpoint 2" << endl;
-
-            cout << "Breakpoint 3" << endl;
             edges.resize(NumEdges);
-            cout << "Breakpoint 4" << endl;
-            for(unsigned int indexEdges = 0; indexEdges < NumEdges; indexEdges++){
-                cout << "Breakpoint 5." << indexEdges << endl;
+            for(int indexEdges = 0; indexEdges < NumEdges; indexEdges++){
                 inputLine >> useless >> edges[indexEdges];
-                cout << "edges[" << indexEdges <<  "]: " << edges[indexEdges] << endl;
             }
             mesh.Cell2DsEdges.push_back(edges);
-            cout << "Breakpoint 6" << endl;
-            for(unsigned int elementEdges = 0; elementEdges < mesh.Cell2DsEdges[id].size(); elementEdges++){
-                cout << "mesh.Cell2DsEdges[" << id << "][" << elementEdges << "]: "<< mesh.Cell2DsEdges[id][elementEdges] << endl;
-            }
-            cout << "Everything's alright after pushing the edges vector " << id << " back." << endl;
             
         }
 
