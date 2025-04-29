@@ -7,7 +7,7 @@
 
 using namespace std;
 using namespace PolygonalLibrary;
-/*Modificare il file CMakeLists.txt per aggiunger eil file di test e completare il corpo degli ultimi test*/
+
 int main()
 {
     PolygonalMesh mesh;
