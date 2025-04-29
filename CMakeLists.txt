@@ -17,6 +17,7 @@ endif (WIN32)
 
 # Add dependencies
 ################################################################################
+
 ## Eigen3
 find_package(Eigen3 CONFIG REQUIRED)
 list(APPEND PolygonalMesh_LINKED_LIBRARIES PUBLIC Eigen3::Eigen)
@@ -47,12 +48,6 @@ list(APPEND PolygonalMesh_SOURCES ${src_paraview_sources})
 list(APPEND PolygonalMesh_HEADERS ${src_paraview_headers})
 list(APPEND PolygonalMesh_INCLUDE ${src_paraview_includes})
 
-add_subdirectory(src_test)
-
-list(APPEND PolygonalMesh_TEST_SOURCES ${src_test_sources})
-list(APPEND PolygonalMesh_TEST_HEADERS ${src_test_headers})
-list(APPEND PolygonalMesh_TEST_INCLUDE ${src_test_includes})
-
 # Create executable
 ################################################################################
 add_executable(${PROJECT_NAME}
@@ -66,18 +61,3 @@ file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/PolygonalMesh/Cell0Ds.csv  ${CMAKE_CURRENT
 target_link_libraries(${PROJECT_NAME} ${PolygonalMesh_LINKED_LIBRARIES})
 target_include_directories(${PROJECT_NAME} PRIVATE ${PolygonalMesh_INCLUDE})
 target_compile_options(${PROJECT_NAME} PUBLIC -fPIC)
-
-add_executable(${PROJECT_NAME}_TEST
-      main_test.cpp
-      ${PolygonalMesh_SOURCES}
-      ${PolygonalMesh_HEADERS}
-      ${src_test_sources}
-      ${src_test_headers})
-
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/PolygonalMesh/Cell0Ds.csv  ${CMAKE_CURRENT_SOURCE_DIR}/PolygonalMesh/Cell1Ds.csv  ${CMAKE_CURRENT_SOURCE_DIR}/PolygonalMesh/Cell2Ds.csv
-      DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-
-target_link_libraries(${PROJECT_NAME}_TEST ${PolygonalMesh_LINKED_LIBRARIES})
-target_include_directories(${PROJECT_NAME}_TEST PRIVATE ${PolygonalMesh_INCLUDE})
-target_compile_options(${PROJECT_NAME}_TEST PUBLIC -fPIC)
-

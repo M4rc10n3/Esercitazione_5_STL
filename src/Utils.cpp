@@ -160,8 +160,6 @@ namespace PolygonalLibrary{
         int id;
         int NumVertices;
         int NumEdges;
-        vector<int> vertices;
-        vector<int> edges;
         for(const string& line : listOfAllLines){
 
             istringstream inputLine(line);
@@ -171,21 +169,17 @@ namespace PolygonalLibrary{
                       >> NumVertices;
             
             mesh.Cell2DsVertices[id].resize(NumVertices);
-            vertices.resize(NumVertices);
 
             for(int indexVertices = 0; indexVertices < NumVertices; indexVertices++){
-                inputLine >> useless >> vertices[indexVertices];
+                inputLine >> useless >> mesh.Cell2DsVertices[id][indexVertices];
             }
-            mesh.Cell2DsVertices.push_back(vertices);
 
             inputLine >> useless >> NumEdges;
             mesh.Cell2DsEdges[id].resize(NumEdges);
 
-            edges.resize(NumEdges);
             for(int indexEdges = 0; indexEdges < NumEdges; indexEdges++){
-                inputLine >> useless >> edges[indexEdges];
+                inputLine >> useless >> mesh.Cell2DsEdges[id][indexEdges];
             }
-            mesh.Cell2DsEdges.push_back(edges);
             
         }
 
