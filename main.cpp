@@ -60,14 +60,14 @@ int main()
 
     double tolerance = 1e-6;
     // Testing the length of the edges
-    if(!EdgesLengthsAreGreaterThanZero(mesh, tolerance)){
+    if(!EdgesLengthsAreGreaterThanTolerance(mesh, tolerance)){
         return 4;
     }
     cout << "All the edges are real edges, that is they have length greater than 0. Well done ;)" << endl;
     cout << endl;
 
     // Testing the area of polygons
-    if (!PolygonsAreasAreGreaterThanZero(mesh, tolerance)){
+    if (!PolygonsAreasAreGreaterThanToleranceSquared(mesh, tolerance)){
         return 5;
     }
     cout << "All the polygons have real areas, that is they have an area greater than 0. Well done ;)" << endl;

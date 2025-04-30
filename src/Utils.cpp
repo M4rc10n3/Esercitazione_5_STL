@@ -247,7 +247,7 @@ namespace PolygonalLibrary{
         return true;
     }
 
-    bool EdgesLengthsAreGreaterThanZero(PolygonalMesh& mesh, const double& tolerance){
+    bool EdgesLengthsAreGreaterThanTolerance(PolygonalMesh& mesh, const double& tolerance){
         for(unsigned int id = 0; id < mesh.NumCell1Ds; id++){
             int id_point_1 = mesh.Cell1DsExtrema(0, id);
             int id_point_2 = mesh.Cell1DsExtrema(1, id);
@@ -269,7 +269,7 @@ namespace PolygonalLibrary{
         return true;
     }
 
-    bool PolygonsAreasAreGreaterThanZero(PolygonalMesh& mesh, const double& tolerance){
+    bool PolygonsAreasAreGreaterThanToleranceSquared(PolygonalMesh& mesh, const double& tolerance){
         /* Testing the area of the polygons dividing them into triangles with a common vertex that is the barycenter of the polygon.
         In order to ccalculate the area, I decided to use the Heron's formula. */
         for(unsigned int id = 0; id < mesh.NumCell2Ds; id++){

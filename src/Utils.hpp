@@ -54,20 +54,20 @@ namespace PolygonalLibrary{
     bool Cell2DsMarkersAreCorrect(PolygonalMesh& mesh);
 
     
-    /* EdgesLengthsAreGreaterThanZero is a testing function that checks whether every edge stored in the object mesh 
+    /* EdgesLengthsAreGreaterThanTolerance is a testing function that checks whether every edge stored in the object mesh 
     of type PolygonalMesh is a proper edge, that is it has a length greater than tolerance.
     
     mesh: the object in which the data is stored;
     tolerance: what the length of each edge should be greater of */
-    bool EdgesLengthsAreGreaterThanZero(PolygonalMesh& mesh, const double& tolerance);
+    bool EdgesLengthsAreGreaterThanTolerance(PolygonalMesh& mesh, const double& tolerance);
     
 
-    /* PolygonsAreasAreGreaterThanZero is a testing function that checks whether every polygon stored in the object mesh 
+    /* PolygonsAreasAreGreaterThanToleranceSquared is a testing function that checks whether every polygon stored in the object mesh 
     of type PolygonalMesh has got a proper area, that is it has an area greater than tolerance squared. 
 
     mesh: the object in which the data is stored;
     tolerance: what the square root of the area of each polygon should be greater of */
-    bool PolygonsAreasAreGreaterThanZero(PolygonalMesh& mesh, const double& tolerance);
+    bool PolygonsAreasAreGreaterThanToleranceSquared(PolygonalMesh& mesh, const double& tolerance);
 
 }
 
